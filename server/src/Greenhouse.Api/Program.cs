@@ -1,5 +1,10 @@
 using Greenhouse.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Greenhouse.Api.Endpoints.SensorReadings;
+using Greenhouse.Infrastructure.Repositories;
+using Greenhouse.Application.Services;
+using Greenhouse.Domain.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<GreenhouseDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
+builder.Services.AddScoped<ISensorReadingRepository, SensorReadingRepository>();
+builder.Services.AddScoped<SensorReadingService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,7 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// end points will be here
+app.MapGetLatestReading();
 
 app.Run();
 
