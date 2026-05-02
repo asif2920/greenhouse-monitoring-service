@@ -1,0 +1,265 @@
+openapi: 3.1.0
+info:
+  title: Greenhouse Monitoring Service API
+  version: 1.0.0
+  description: |
+    Minimal API for real-time greenhouse sensor monitoring.
+    Provides endpoints for retrieving the latest sensor reading,
+    submitting new readings, and fetching recent anomalies.
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+
+paths:
+  /api/readings/latest:
+    get:
+      operationId: getLatestReading
+      summary: Get the latest sensor reading
+      tags:
+        - Readings
+      responses:
+        '200':
+          description: Latest sensor reading retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorReading'
+              examples:
+                sample:
+                  summary: Example latest reading
+                  value:
+                    id: "d3f1c7c2-8a2e-4b8e-9a5e-123456789abc"
+                    sequenceNumber: 42
+                    timestamp: "2025-05-01T18:25:43.511Z"
+                    temperature: 24.7
+                    humidity: 55.2
+                    co2Ppm: 680
+        '404':
+          description: No sensor readings found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                noReadings:
+                  value:
+                    error: "NotFound"
+                    message: "No sensor readings available."
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                serverError:
+                  value:
+                    error: "InternalServerError"
+                    message: "An unexpected error occurred while processing the request."            
+
+  /api/readings:
+    post:
+      operationId: submitReadings
+      summary: Submit one or more sensor readings
+      tags:
+        - Readings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/SensorReading'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/SensorReading'
+            examples:
+              singleReading:
+                summary: Single reading example
+                value:
+                  id: "b2c1d7e1-1234-4c9a-9f1a-abcdef123456"
+                  sequenceNumber: 43
+                  timestamp: "2025-05-01T18:26:10.000Z"
+                  temperature: 25.1
+                  humidity: 54.8
+                  co2Ppm: 700
+              bulkReadings:
+                summary: Bulk readings example
+                value:
+                  - id: "11111111-2222-3333-4444-555555555555"
+                    sequenceNumber: 44
+                    timestamp: "2025-05-01T18:27:00.000Z"
+                    temperature: 25.3
+                    humidity: 54.0
+                    co2Ppm: 710
+                  - id: "66666666-7777-8888-9999-000000000000"
+                    sequenceNumber: 45
+                    timestamp: "2025-05-01T18:28:00.000Z"
+                    temperature: 25.4
+                    humidity: 53.9
+                    co2Ppm: 720        
+      responses:
+        '201':
+          description: Reading(s) Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acceptedCount:
+                    type: integer
+                  lastSequenceNumber:
+                    type: integer
+                  lastTimestamp:
+                    type: string
+                    format: date-time
+              examples:
+                sample:
+                  summary: Example response for accepted readings
+                  value:
+                    acceptedCount: 2
+                    lastSequenceNumber: 45
+                    lastTimestamp: "2025-05-01T18:28:00.000Z"
+        '400':
+          description: Invalid payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidPayload:
+                  value:
+                    error: "BadRequest"
+                    message: "Invalid request payload. Please provide a valid SensorReading or an array of SensorReadings."
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                serverError:
+                  value:
+                    error: "InternalServerError"
+                    message: "An unexpected error occurred while processing the request."            
+
+  /api/anomalies:
+    get:
+      operationId: getRecentAnomalies
+      summary: Get the last 20 detected anomalies
+      tags:
+        - Anomalies
+      responses:
+        '200':
+          description: List of recent anomalies retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Anomaly'   
+              examples:
+                sample:
+                  value:
+                    - id: "aaaa1111-bbbb-2222-cccc-333333333333"
+                      detectedAt: "2025-05-01T18:30:00.000Z"
+                      sensorType: "Temperature"
+                      value: 32.5
+                      zScore: 3.1
+                      reason: "Temperature spike detected"
+                    - id: "dddd4444-eeee-5555-ffff-666666666666"
+                      detectedAt: "2025-05-01T18:32:00.000Z"
+                      sensorType: "CO2"
+                      value: 1500
+                      zScore: 2.9
+                      reason: "CO2 level unusually high"   
+        '404':
+          description: No anomalies found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                noAnomalies:
+                  value:
+                    error: "NotFound"
+                    message: "No anomalies detected in the last 24 hours."
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                serverError:
+                  value:
+                    error: "InternalServerError"
+                    message: "An unexpected error occurred while processing the request." 
+                
+
+components:
+  schemas:
+    SensorReading:
+      type: object
+      required:
+        - id
+        - sequenceNumber
+        - timestamp
+        - temperature
+        - humidity
+        - co2Ppm
+      properties:
+        id:
+          type: string
+          format: uuid
+        sequenceNumber:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+        temperature:
+          type: number
+          format: decimal
+        humidity:
+          type: number
+          format: decimal
+        co2Ppm:
+          type: integer
+
+    Anomaly:
+      type: object
+      required:
+        - id
+        - detectedAt
+        - sensorType
+        - value
+        - zScore
+        - reason
+      properties:
+        id:
+          type: string
+          format: uuid
+        detectedAt:
+          type: string
+          format: date-time
+        sensorType:
+          type: string
+          description: Sensor type that triggered the anomaly (Temperature, Humidity, CO2)
+        value:
+          type: number
+        zScore:
+          type: number
+        reason:
+          type: string      
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code
+        message:
+          type: string
+          description: Human-readable error message      
