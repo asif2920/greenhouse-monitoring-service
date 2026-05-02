@@ -4,6 +4,8 @@ using Greenhouse.Api.Endpoints.SensorReadings;
 using Greenhouse.Infrastructure.Repositories;
 using Greenhouse.Application.Services;
 using Greenhouse.Domain.Interfaces;
+using Greenhouse.Api.Endpoints.Anomalies;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,11 @@ builder.Services.AddDbContext<GreenhouseDbContext>(options =>
 
 builder.Services.AddScoped<ISensorReadingRepository, SensorReadingRepository>();
 builder.Services.AddScoped<SensorReadingService>();
+
+builder.Services.AddScoped<IAnomalyRepository, AnomalyRepository>();
+builder.Services.AddScoped<AnomalyService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +35,8 @@ if (app.Environment.IsDevelopment())
 
 app.MapGetLatestReading();
 app.MapCreateReading();
+
+app.MapGetRecentAnomalies();
 
 app.Run();
 
