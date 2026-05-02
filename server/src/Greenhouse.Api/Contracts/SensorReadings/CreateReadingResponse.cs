@@ -1,6 +1,5 @@
 namespace Greenhouse.Api.Contracts.SensorReadings;
-public record ReadingResponse
-(
+public record CreateReadingResponse(
     Guid Id,
     long SequenceNumber,
     DateTime Timestamp,

@@ -16,5 +16,10 @@ namespace Greenhouse.Application.Services
         {
             return await _sensorReadingRepository.GetLatestAsync(cancellationToken);
         }
+
+        public async Task AddReadingAsync(SensorReading reading, CancellationToken cancellationToken = default)
+        {
+            await _sensorReadingRepository.AddAsync(reading, cancellationToken);
+        }
     }
 }

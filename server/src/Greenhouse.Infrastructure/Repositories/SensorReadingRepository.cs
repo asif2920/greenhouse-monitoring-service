@@ -20,4 +20,10 @@ public class SensorReadingRepository : ISensorReadingRepository
             .OrderByDescending(r => r.SequenceNumber)
             .FirstOrDefaultAsync(cancellationToken);
     }
+
+    public async Task AddAsync(SensorReading reading, CancellationToken cancellationToken = default)
+    {
+        await _context.SensorReading.AddAsync(reading, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
 }

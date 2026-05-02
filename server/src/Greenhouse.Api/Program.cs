@@ -27,6 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGetLatestReading();
+app.MapCreateReading();
 
 app.Run();
 
