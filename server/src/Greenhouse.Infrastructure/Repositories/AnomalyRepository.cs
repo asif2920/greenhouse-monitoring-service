@@ -21,4 +21,21 @@ public class AnomalyRepository : IAnomalyRepository
             .Take(count)
             .ToListAsync(cancellationToken);
     }
+
+    public async Task AddAsync(Anomaly anomaly, CancellationToken cancellationToken = default)
+    {
+        await _db.Anomaly.AddAsync(anomaly, cancellationToken);
+
+        var all = await _db.Anomaly
+            .OrderByDescending(a => a.DetectedAt)
+            .ToListAsync(cancellationToken);
+
+        if (all.Count > 20)
+        {
+            var toRemove = all.Skip(20).ToList();
+            _db.Anomaly.RemoveRange(toRemove);
+        }
+
+        await _db.SaveChangesAsync(cancellationToken);
+    }
 }

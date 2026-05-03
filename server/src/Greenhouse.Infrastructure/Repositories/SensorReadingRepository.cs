@@ -26,4 +26,13 @@ public class SensorReadingRepository : ISensorReadingRepository
         await _context.SensorReading.AddAsync(reading, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<List<SensorReading>> GetRecentAsync(int count = 20, CancellationToken cancellationToken = default)
+    {
+        return await _context.SensorReading
+            .OrderByDescending(r => r.Timestamp)
+            .Take(count)
+            .ToListAsync(cancellationToken);
+    }
+
 }
