@@ -6,6 +6,9 @@ using Greenhouse.Application.Services;
 using Greenhouse.Domain.Interfaces;
 using Greenhouse.Api.Endpoints.Anomalies;
 using System.Text.Json;
+using Greenhouse.Api.Hubs;
+using Microsoft.AspNetCore.SignalR;
+using Greenhouse.Domain.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +32,25 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.PropertyNameCaseInsensitive = true;
 });
 
+builder.Services.AddScoped<IAnomalyDetectionService, AnomalyDetectionService>();
+builder.Services.AddScoped<AnomalyDetectionOrchestrator>();
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:4200"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
+
+
 
 var app = builder.Build();
 
@@ -39,10 +61,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
+
 app.MapGetLatestReading();
 app.MapCreateReading();
 
 app.MapGetRecentAnomalies();
+
+app.MapHub<GreenhouseHub>("/hubs/greenhouse");
 
 app.Run();
 

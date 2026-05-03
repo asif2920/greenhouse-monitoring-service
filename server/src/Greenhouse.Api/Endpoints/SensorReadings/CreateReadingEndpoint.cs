@@ -3,8 +3,10 @@ namespace Greenhouse.Api.Endpoints.SensorReadings;
 using System.Text.Json;
 using Greenhouse.Api.Contracts.SensorReadings;
 using Greenhouse.Application.Services;
-using Microsoft.AspNetCore.Mvc;
 using Greenhouse.Domain.Entities;
+using Greenhouse.Api.Hubs;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 public static class CreateReadingEndpoint
 {
@@ -12,7 +14,10 @@ public static class CreateReadingEndpoint
     {
         app.MapPost("/api/readings", async (
             [FromBody] JsonElement payload,
-            [FromServices] SensorReadingService sensorReadingService) =>
+            [FromServices] SensorReadingService sensorReadingService,
+            [FromServices] AnomalyDetectionOrchestrator anomalyOrchestrator,
+            [FromServices] IHubContext<GreenhouseHub> hub,
+            CancellationToken cancellationToken) =>
         {
             var jsonOptions = new JsonSerializerOptions
             {
@@ -41,7 +46,14 @@ public static class CreateReadingEndpoint
                         Co2Ppm = req.Co2Ppm
                     };
 
-                    await sensorReadingService.AddReadingAsync(reading);
+                    await sensorReadingService.AddReadingAsync(reading, cancellationToken);
+
+                    var anomaly = await anomalyOrchestrator.ProcessAsync(reading, cancellationToken);
+
+                    await hub.Clients.All.SendAsync("NewReading", reading, cancellationToken);
+
+                    if (anomaly != null)
+                        await hub.Clients.All.SendAsync("AnomalyDetected", anomaly, cancellationToken);
 
                     responses.Add(new CreateReadingResponse(
                         reading.Id,
@@ -71,7 +83,14 @@ public static class CreateReadingEndpoint
                 Co2Ppm = request.Co2Ppm
             };
 
-            await sensorReadingService.AddReadingAsync(singleReading);
+            await sensorReadingService.AddReadingAsync(singleReading, cancellationToken);
+
+            var singleAnomaly = await anomalyOrchestrator.ProcessAsync(singleReading, cancellationToken);
+
+            await hub.Clients.All.SendAsync("NewReading", singleReading, cancellationToken);
+
+            if (singleAnomaly != null)
+                await hub.Clients.All.SendAsync("AnomalyDetected", singleAnomaly, cancellationToken);
 
             var singleResponse = new CreateReadingResponse(
                 singleReading.Id,
