@@ -5,7 +5,7 @@ using Greenhouse.Infrastructure.Repositories;
 using Greenhouse.Application.Services;
 using Greenhouse.Domain.Interfaces;
 using Greenhouse.Api.Endpoints.Anomalies;
-
+using System.Text.Json;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +22,12 @@ builder.Services.AddScoped<SensorReadingService>();
 
 builder.Services.AddScoped<IAnomalyRepository, AnomalyRepository>();
 builder.Services.AddScoped<AnomalyService>();
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.SerializerOptions.PropertyNameCaseInsensitive = true;
+});
 
 
 var app = builder.Build();
