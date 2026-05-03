@@ -17,10 +17,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Greenhouse.Application\Greenhouse.Application.csproj" />
-    <ProjectReference Include="..\Greenhouse.Domain\Greenhouse.Domain.csproj" />
-    <ProjectReference Include="..\Greenhouse.Infrastructure\Greenhouse.Infrastructure.csproj" />
-  </ItemGroup>
+<ItemGroup>
+  <ProjectReference Include="..\Greenhouse.Infrastructure\Greenhouse.Infrastructure.csproj" />
+  <ProjectReference Include="..\Greenhouse.Application\Greenhouse.Application.csproj" />
+</ItemGroup>
 
 </Project>
