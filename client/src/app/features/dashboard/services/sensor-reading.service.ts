@@ -10,6 +10,6 @@ export class SensorReadingService {
   private baseUrl = environment.apiBaseUrl;
 
   getLatestReading(): Observable<ReadingResponse> {
-    return this.http.get<ReadingResponse>(`${this.baseUrl}/readings/latest`);
+    return this.http.get<ReadingResponse>(`${this.baseUrl}/api/readings/latest`);
   }
 }

@@ -2,7 +2,9 @@
   <h1>Greenhouse Monitor</h1>
 
   <div class="status">
-    <span class="badge live">LIVE</span>
-    <span class="timestamp">Last update: {{ lastUpdated | date:'medium' }}</span>
+       <span class="badge" [ngClass]="connectionStatus">
+    {{ connectionStatus }}
+  </span>
+    <span class="timestamp">Last update: {{ lastUpdated }}</span>
   </div>
 </header>

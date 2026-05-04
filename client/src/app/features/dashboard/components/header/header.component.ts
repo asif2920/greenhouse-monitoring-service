@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   @Input() lastUpdated: string | null | undefined = null;
+  @Input() connectionStatus: 'connected' | 'reconnecting' | 'disconnected' | null = null;
 }

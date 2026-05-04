@@ -1,4 +1,7 @@
-<app-header [lastUpdated]="(reading$ | async)?.timestamp"></app-header>
+<app-header
+  [lastUpdated]="(reading$ | async)?.timestamp"
+  [connectionStatus]="(connectionStatus$ | async)">
+</app-header>
 
 <div class="cards">
   <app-sensor-card

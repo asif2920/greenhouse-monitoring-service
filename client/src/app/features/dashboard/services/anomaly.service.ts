@@ -10,6 +10,6 @@ export class AnomalyService {
   private baseUrl = environment.apiBaseUrl;
 
   getLatestAnomalies(): Observable<Anomaly[]> {
-    return this.http.get<Anomaly[]>(`${this.baseUrl}/anomalies`);
+    return this.http.get<Anomaly[]>(`${this.baseUrl}/api/anomalies`);
   }
 }

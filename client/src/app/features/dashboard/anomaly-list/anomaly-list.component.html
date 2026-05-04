@@ -6,9 +6,9 @@
   </div>
 
   <ul>
-    <li *ngFor="let a of anomalies" [class]="a.sensorType.toLowerCase()">
+    <li *ngFor="let a of anomalies" [class]="(a.sensorType || '').toLowerCase()">
       <div class="left">
-        <span class="time">{{ a.detectedAt + 'z' | date:'short' }}</span>
+        <span class="time">{{ a.detectedAt }}</span>
         <span class="type">{{ a.sensorType }}</span>
       </div>
 
