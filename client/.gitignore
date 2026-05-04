@@ -42,3 +42,28 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Angular build cache
+.angular/
+
+# Angular SSR (if accidentally re‑enabled)
+server.ts
+main.server.ts
+tsconfig.server.json
+
+# Environment files
+src/environments/*.local.ts
+src/environments/*.dev.ts
+
+# Linux
+*.swp
+
+# macOS
+.AppleDouble
+.LSOverride
+
+*.log
+logs/
+
+coverage/
+.nyc_output/
