@@ -1,0 +1,47 @@
+.card {
+  padding: 1.2rem;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  max-width: 480px;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .timestamp {
+      font-size: 0.8rem;
+      color: #666;
+    }
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+
+    .metric {
+      text-align: center;
+
+      label {
+        display: block;
+        font-size: 0.75rem;
+        color: #777;
+        margin-bottom: 0.25rem;
+      }
+
+      span {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
