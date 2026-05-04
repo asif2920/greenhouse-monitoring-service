@@ -23,6 +23,7 @@ export class DashboardComponent {
   private sensorData = inject(SensorDataService);
 
   reading$ = this.sensorData.getCurrentReading();
+  anomalies$ = this.sensorData.getAnomalies();
 
   ngOnInit(): void {
     console.log('DashboardComponent initialized');

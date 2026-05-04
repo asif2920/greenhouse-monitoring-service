@@ -1,16 +1,21 @@
 <div class="anomaly-list">
-  <h3>Anomalies</h3>
+  <h3>Recent Anomalies</h3>
 
-  <div *ngIf="anomalies.length === 0">
+  <div *ngIf="anomalies.length === 0" class="empty">
     No anomalies detected.
   </div>
 
   <ul>
-    <li *ngFor="let a of anomalies">
-      <span>{{ a.detectedAt | date:'short' }}</span>
-      <strong>{{ a.sensorType }}</strong>
-      <span>{{ a.value }}</span>
-      <em>{{ a.reason }}</em>
+    <li *ngFor="let a of anomalies" [class]="a.sensorType.toLowerCase()">
+      <div class="left">
+        <span class="time">{{ a.detectedAt + 'z' | date:'short' }}</span>
+        <span class="type">{{ a.sensorType }}</span>
+      </div>
+
+      <div class="right">
+        <span class="value">{{ a.value }}</span>
+        <span class="reason">{{ a.reason }}</span>
+      </div>
     </li>
   </ul>
 </div>

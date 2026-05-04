@@ -1,25 +1,94 @@
 .anomaly-list {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  font-family: 'Inter', sans-serif;
+
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .empty {
+    color: #777;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+  }
 
   ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   li {
-    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem 0;
     border-bottom: 1px solid #eee;
+    transition: background 0.2s ease;
 
-    strong {
-      margin: 0 0.5rem;
+    &:last-child {
+      border-bottom: none;
     }
 
-    em {
-      color: #888;
-      font-size: 0.8rem;
+    &:hover {
+      background: #f8f9fb;
     }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .time {
+        font-size: 0.8rem;
+        color: #666;
+      }
+
+      .type {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 6px;
+        color: #fff;
+        width: fit-content;
+        text-transform: capitalize;
+      }
+    }
+
+    .right {
+      text-align: right;
+
+      .value {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #333;
+        display: block;
+      }
+
+      .reason {
+        font-size: 0.8rem;
+        color: #777;
+      }
+    }
+  }
+
+  /* Color coding by sensor type */
+  li.temperature .type {
+    background: #e74c3c; /* red */
+  }
+
+  li.humidity .type {
+    background: #3498db; /* blue */
+  }
+
+  li.co2 .type,
+  li.co2ppm .type {
+    background: #f1c40f; /* yellow */
+    color: #000;
   }
 }

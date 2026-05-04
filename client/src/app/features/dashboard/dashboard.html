@@ -23,4 +23,4 @@
   </app-sensor-card>
 </div>
 
-<app-anomaly-list [anomalies]="[]"></app-anomaly-list>
+<app-anomaly-list [anomalies]="(anomalies$ | async) ?? []"></app-anomaly-list>
