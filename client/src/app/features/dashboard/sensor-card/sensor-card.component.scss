@@ -1,0 +1,30 @@
+.card {
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  }
+
+  &.green { border-left: 6px solid #2ecc71; }
+  &.yellow { border-left: 6px solid #f1c40f; }
+  &.red { border-left: 6px solid #e74c3c; }
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
+
+  .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+  }
+}

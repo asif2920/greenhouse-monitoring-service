@@ -1,2 +1,26 @@
-<h1>Dashboard</h1>
-<p>Initial project setup complete.</p>
+<app-header [lastUpdated]="(reading$ | async)?.timestamp"></app-header>
+
+<div class="cards">
+  <app-sensor-card
+    label="Temperature"
+    [value]="(reading$ | async)?.temperature"
+    unit="°C"
+    statusColor="green">
+  </app-sensor-card>
+
+  <app-sensor-card
+    label="Humidity"
+    [value]="(reading$ | async)?.humidity"
+    unit="%"
+    statusColor="green">
+  </app-sensor-card>
+
+  <app-sensor-card
+    label="CO₂"
+    [value]="(reading$ | async)?.co2Ppm"
+    unit="ppm"
+    statusColor="green">
+  </app-sensor-card>
+</div>
+
+<app-anomaly-list [anomalies]="(anomalies$ | async) ?? []"></app-anomaly-list>

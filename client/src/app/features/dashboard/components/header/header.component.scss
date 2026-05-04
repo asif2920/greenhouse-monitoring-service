@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .badge.live {
+      background: #2ecc71;
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .timestamp {
+      font-size: 0.85rem;
+      color: #555;
+    }
+  }
+}
