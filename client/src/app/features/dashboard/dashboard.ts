@@ -1,34 +1,31 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SensorReadingService } from './services/sensor-reading.service';
-import { ReadingResponse } from './models/reading-response';
+
+import { HeaderComponent } from './components/header/header.component';
+import { SensorCardComponent } from './sensor-card/sensor-card.component';
+import { AnomalyListComponent } from './anomaly-list/anomaly-list.component';
+
+import { SensorDataService } from './services/sensor-data.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    SensorCardComponent,
+    AnomalyListComponent,
+  ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-export class DashboardComponent implements OnInit {
-  private sensorService = inject(SensorReadingService);
+export class DashboardComponent {
+  private sensorData = inject(SensorDataService);
 
-  reading: ReadingResponse | null = null;
-  loading = true;
-  error: string | null = null;
+  reading$ = this.sensorData.getCurrentReading();
 
   ngOnInit(): void {
-    this.sensorService.getLatestReading().subscribe({
-      next: (data: ReadingResponse) => {
-        console.log('API data received:', data); // DEBUG
-        this.reading = data;
-        this.loading = false;
-      },
-      error: (err: unknown) => {
-        console.error('API error:', err); // DEBUG
-        this.error = 'Failed to load latest sensor reading.';
-        this.loading = false;
-      }
-    });
+    console.log('DashboardComponent initialized');
+    this.sensorData.loadLatest();
   }
 }

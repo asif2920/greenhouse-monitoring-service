@@ -1,0 +1,22 @@
+.card {
+  padding: 1rem;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+
+  &.green { border-left: 6px solid #2ecc71; }
+  &.yellow { border-left: 6px solid #f1c40f; }
+  &.red { border-left: 6px solid #e74c3c; }
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+  }
+
+  .value {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+}

@@ -1,23 +1,26 @@
-<div *ngIf="!loading && reading" class="card">
-  <div class="card-header">
-    <h2>Sequence #{{ reading.sequenceNumber }}</h2>
-    <span class="timestamp">{{ reading.timestamp | date:'short' }}</span>
-  </div>
+<app-header [lastUpdated]="(reading$ | async)?.timestamp"></app-header>
 
-  <div class="metrics">
-    <div class="metric">
-      <label>Temperature</label>
-      <span>{{ reading.temperature }} °C</span>
-    </div>
+<div class="cards">
+  <app-sensor-card
+    label="Temperature"
+    [value]="(reading$ | async)?.temperature"
+    unit="°C"
+    statusColor="green">
+  </app-sensor-card>
 
-    <div class="metric">
-      <label>Humidity</label>
-      <span>{{ reading.humidity }} %</span>
-    </div>
+  <app-sensor-card
+    label="Humidity"
+    [value]="(reading$ | async)?.humidity"
+    unit="%"
+    statusColor="green">
+  </app-sensor-card>
 
-    <div class="metric">
-      <label>CO₂</label>
-      <span>{{ reading.co2Ppm }} ppm</span>
-    </div>
-  </div>
+  <app-sensor-card
+    label="CO₂"
+    [value]="(reading$ | async)?.co2Ppm"
+    unit="ppm"
+    statusColor="green">
+  </app-sensor-card>
 </div>
+
+<app-anomaly-list [anomalies]="[]"></app-anomaly-list>

@@ -1,0 +1,16 @@
+<div class="anomaly-list">
+  <h3>Anomalies</h3>
+
+  <div *ngIf="anomalies.length === 0">
+    No anomalies detected.
+  </div>
+
+  <ul>
+    <li *ngFor="let a of anomalies">
+      <span>{{ a.detectedAt | date:'short' }}</span>
+      <strong>{{ a.sensorType }}</strong>
+      <span>{{ a.value }}</span>
+      <em>{{ a.reason }}</em>
+    </li>
+  </ul>
+</div>

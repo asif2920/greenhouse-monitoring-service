@@ -4,9 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { ReadingResponse } from '../models/reading-response';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SensorReadingService {
   private http = inject(HttpClient);
   private baseUrl = environment.apiBaseUrl;
