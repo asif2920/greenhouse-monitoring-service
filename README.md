@@ -18,6 +18,14 @@ A real-time IoT greenhouse monitoring system built with .NET 8, Angular, SignalR
 
 ---
 
+# 📸 Demo Recording
+
+Demo Recording link: https://drive.google.com/file/d/16PTFrg5tEP0S6-rt5R42X7vhKqkswSzs/view?usp=sharing
+
+Lucid Link: https://lucid.app/lucidchart/55ae0491-aaee-4b20-aaef-e17db5c95403/edit?viewport_loc=71%2C165%2C2175%2C1105%2C0_0&invitationId=inv_a0708970-0cbd-4674-a92e-71c2dd4b914c
+
+---
+
 # 🚀 Run Options
 
 You can run this project in **two ways**:
