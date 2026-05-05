@@ -126,6 +126,10 @@ If sqlite3 is missing:
 
 ```bash
 sudo apt install sqlite3   # Linux
+or 
+apt-get update
+apt-get install sqlite3
+
 brew install sqlite        # Mac
 ```
 
