@@ -167,16 +167,25 @@ curl -X POST http://localhost:5000/api/readings \
 ## 2. Generate anomaly-like readings (10 samples)
 
 ```bash
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 95, "humidity": 10, "timestamp": "2026-05-04T20:01:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 98, "humidity": 12, "timestamp": "2026-05-04T20:02:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 100, "humidity": 8, "timestamp": "2026-05-04T20:03:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 102, "humidity": 5, "timestamp": "2026-05-04T20:04:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 105, "humidity": 3, "timestamp": "2026-05-04T20:05:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 110, "humidity": 2, "timestamp": "2026-05-04T20:06:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 112, "humidity": 1, "timestamp": "2026-05-04T20:07:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 115, "humidity": 1, "timestamp": "2026-05-04T20:08:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 118, "humidity": 0, "timestamp": "2026-05-04T20:09:00Z"}'
-curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature": 120, "humidity": 0, "timestamp": "2026-05-04T20:10:00Z"}'
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":95,"humidity":10,"co2Ppm":850,"timestamp":"2026-05-04T20:01:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":98,"humidity":12,"co2Ppm":900,"timestamp":"2026-05-04T20:02:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":100,"humidity":8,"co2Ppm":950,"timestamp":"2026-05-04T20:03:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":102,"humidity":5,"co2Ppm":1000,"timestamp":"2026-05-04T20:04:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":105,"humidity":3,"co2Ppm":1050,"timestamp":"2026-05-04T20:05:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":110,"humidity":2,"co2Ppm":1100,"timestamp":"2026-05-04T20:06:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":112,"humidity":1,"co2Ppm":1150,"timestamp":"2026-05-04T20:07:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":115,"humidity":1,"co2Ppm":1200,"timestamp":"2026-05-04T20:08:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":118,"humidity":2,"co2Ppm":1250,"timestamp":"2026-05-04T20:09:00Z"}'
+
+curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/json" -d '{"temperature":120,"humidity":3,"co2Ppm":1300,"timestamp":"2026-05-04T20:10:00Z"}'
 ```
 
 👉 These should trigger anomaly detection in dashboard.
