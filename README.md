@@ -196,6 +196,34 @@ curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/js
 
 Angular → .NET API → SignalR → SQLite
 
+![Architecture](docs/screenshots/architectural-diagram.png)
+
+---
+
+## 🏗️ Brief Architecture Notes
+
+The system follows a three‑layer architecture:
+
+### **Frontend (Angular 17 + Vite)**
+- Responsive dashboard built with standalone components.
+- Uses **RxJS** for reactive streams and **SignalR** for real‑time updates.
+- **Chart.js** visualizes temperature trends.
+- **SCSS Grid + media queries** ensure mobile responsiveness.
+
+### **Backend (ASP.NET Core 8 Minimal API)**
+- Exposes REST endpoints and a **SignalR hub** for live data.
+- Handles sensor ingestion, anomaly detection, and persistence.
+- Organized into **Domain**, **Application**, and **Infrastructure** layers.
+
+### **Database (SQLite)**
+- Stores sensor readings and anomalies.
+- Lightweight and ideal for local development.
+- Managed via **Entity Framework Core**.
+
+### **Data Flow**
+Sensors → Backend → Database → Frontend  
+Frontend fetches historical data via REST and subscribes to live updates via SignalR.
+
 ---
 
 # ⚙️ Assumptions
