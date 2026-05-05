@@ -27,3 +27,13 @@
 </div>
 
 <app-anomaly-list [anomalies]="(anomalies$ | async) ?? []"></app-anomaly-list>
+
+<app-simple-chart
+  [data]="chartValues"
+  [labels]="chartLabels"
+  label="Temperature Trend">
+</app-simple-chart>
+
+
+<!-- Developer tester panel -->
+<app-reading-tester></app-reading-tester>
