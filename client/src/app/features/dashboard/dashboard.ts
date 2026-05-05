@@ -7,6 +7,7 @@ import { AnomalyListComponent } from './anomaly-list/anomaly-list.component';
 
 import { SensorDataService } from './services/sensor-data.service';
 import { RealtimeService } from '../../core/services/realtime.service';
+import { ReadingTesterComponent } from './components/reading-tester/reading-tester.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { RealtimeService } from '../../core/services/realtime.service';
     HeaderComponent,
     SensorCardComponent,
     AnomalyListComponent,
+    ReadingTesterComponent,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',

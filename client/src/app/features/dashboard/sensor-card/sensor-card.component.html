@@ -1,4 +1,4 @@
 <div class="card" [class]="statusColor">
   <label>{{ label }}</label>
-  <span class="value">{{ value }} {{ unit }}</span>
+  <span class="value">{{ value| number:'1.2-2' }} {{ unit }}</span>
 </div>

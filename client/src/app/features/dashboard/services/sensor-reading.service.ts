@@ -12,4 +12,9 @@ export class SensorReadingService {
   getLatestReading(): Observable<ReadingResponse> {
     return this.http.get<ReadingResponse>(`${this.baseUrl}/api/readings/latest`);
   }
+
+  postReading(body: any) {
+  return this.http.post(`${this.baseUrl}/api/readings`, body);
+}
+
 }
