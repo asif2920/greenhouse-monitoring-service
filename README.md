@@ -200,6 +200,9 @@ curl -X POST http://localhost:5000/api/readings -H "Content-Type: application/js
 
 Angular → .NET API → SignalR → SQLite
 
+![Architecture](docs/screenshots/architectural-diagram.png)
+
+
 ---
 
 ## 🏗️ Brief Architecture Notes
