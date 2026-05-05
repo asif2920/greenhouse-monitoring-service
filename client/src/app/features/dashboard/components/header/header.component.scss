@@ -15,30 +15,34 @@
     align-items: center;
     gap: 1rem;
 
-    .badge.live {
-      background: #2ecc71;
-      padding: 6px 12px;
-      border-radius: 8px;
-      color: white;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
     .timestamp {
       font-size: 0.85rem;
       color: #555;
     }
   }
-  .badge {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: capitalize;
 
-  &.connected { background: #2ecc71; color: white; }
-  &.reconnecting { background: #f1c40f; color: black; }
-  &.disconnected { background: #e74c3c; color: white; }
+  .badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &.connected {
+      background: #2ecc71;   // green
+      color: white;
+    }
+
+    &.reconnecting {
+      background: #f1c40f;   // yellow
+      color: black;
+    }
+
+    &.disconnected {
+      background: #e74c3c;   // red
+      color: white;
+    }
   }
 
 }
