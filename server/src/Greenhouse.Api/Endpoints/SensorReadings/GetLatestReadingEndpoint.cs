@@ -15,7 +15,7 @@ public static class GetLatestSensorReadingEndpoint
 
             if (latestReading == null)
             {
-                return Results.NotFound();
+                return Results.Ok(null);
             }
 
             var response = new ReadingResponse(

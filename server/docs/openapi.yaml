@@ -34,17 +34,6 @@ paths:
                     temperature: 24.7
                     humidity: 55.2
                     co2Ppm: 680
-        '404':
-          description: No sensor readings found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                noReadings:
-                  value:
-                    error: "NotFound"
-                    message: "No sensor readings available."
         '500':
           description: Internal server error
           content:
