@@ -12,9 +12,9 @@ A real-time IoT greenhouse monitoring system built with .NET 8, Angular, SignalR
 
 # 📸 Screenshots
 
-Add your screenshots:
+## Dashboard with real time updates and anomalies
 
-* Dashboard with real time updates and anomlaies: `docs/screenshots/dashboard.png`
+![Dashboard](docs/screenshots/dashboard.png)
 
 ---
 
