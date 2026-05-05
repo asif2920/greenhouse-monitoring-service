@@ -64,6 +64,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<GreenhouseDbContext>();
+    db.Database.EnsureCreated();
+}
 
 app.MapGetLatestReading();
 app.MapCreateReading();
